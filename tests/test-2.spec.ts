@@ -62,12 +62,42 @@ test('Generic methods', { tag: ['@RunMe', '@Smoke'] }, async ({ page }) => {
   }
 });
 
-test('Waits', async ({ page }) => {
-  await page.goto('https://www.edgewordstraining.co.uk/webdriver2/');
+test('Waits',async ({ page }) => {
+  //test.setTimeout(20 * 1000);
+  test.slow(); //Triple test timeout
+  page.setDefaultTimeout(7000); //Actions here have 7s. Set as 5 in global config. Default is inf.
+  await page.goto('https://www.edgewordstraining.co.uk/webdriver2/',{timeout:20000});
   await page.getByRole('link', { name: 'Access Basic Examples Area' }).click();
   await page.getByRole('link', { name: 'Dynamic Content' }).click();
   await page.locator('#delay').click();
   await page.locator('#delay').fill('10');
   await page.getByRole('link', { name: 'Load Content' }).click();
+  //Wait for spinner/loader to go away
+  await page.waitForSelector('#spinner-holder > img', {state: 'hidden',timeout: 11000 });
+  //await page.locator('#image-holder > img').click({timeout: 5000});
+  await page.locator('#image-holder > img').click();
+  await page.getByRole('link', { name: 'Home' }).click();
   
+});
+
+
+test("Waiting for a pop up window", async ({ page, context }) => {
+
+  await page.goto("https://www.edgewordstraining.co.uk/webdriver2/docs/dynamicContent.html")
+
+  //[a,b] = [10,20] - aray destructuring syntax will assign a=10 b=20
+  //Below we discard the second promise return value - we only need the first which gets us a handle to the new page
+  const [newSpawnedPage] = await Promise.all([ //When these two "future" actions complete return the new page fixture
+    context.waitForEvent('page'),
+    page.locator("#right-column > a[onclick='return popUpWindow();']").click()
+  ])
+
+  await page.waitForTimeout(2000); //Essentially a Thread.sleep(2000); - try to avoid this as other wait types can exit early if condition is met
+
+
+  const closeBtn = newSpawnedPage.getByRole('link', { name: 'Close Window' })
+  await closeBtn.click();
+
+  await page.getByRole('link', { name: 'Load Content' }).click();
+
 });
