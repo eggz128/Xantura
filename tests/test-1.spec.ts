@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'; //Bring in PW test() and expect() methods for use in this file
 
 //Test method takes 2 arguments: 1st-Test name, 2nd-call back function with the test code to run
-test('test', async ({ page }) => { //Always "await" steps that run in browser. To do that this function must be async
+test('Login test @smoke', async ({ page }) => { //Always "await" steps that run in browser. To do that this function must be async
   //Cy: cy.open('https://www.edgewordstraining.co.uk/webdriver2/')
   //WD Js: await driver.get('https://www.edgewordstraining.co.uk/webdriver2/')
   await page.goto('/webdriver2/'); //BaseURL set in config file
@@ -12,26 +12,29 @@ test('test', async ({ page }) => { //Always "await" steps that run in browser. T
   //await page.getByRole('link', { name: 'Login To' }).click();
   await page.getByRole('link', { name: /Login .*/ }).click();
 
-  //If an element is to be used multiple times you can define a variable that holds the locator
-  //Locators can be "chained" i.e. find ElementA . inside that, find ElementB
-  //.describe() can give a "friendly name" to the target element for use in the HTML report. Otherwise the locator chain is used.
-  const username = page.getByRole('row', { name: 'User ' }).locator('#username').describe('The username field'); //Unlike WebDriver - no search for the element is performed here in browser. No need to await.
-  //The variable can then be used multiple times instead of repeating the entire locator.
-  await page.locator('input').first().fill('test')
+  test.step('Login', async () => {
+    //If an element is to be used multiple times you can define a variable that holds the locator
+    //Locators can be "chained" i.e. find ElementA . inside that, find ElementB
+    //.describe() can give a "friendly name" to the target element for use in the HTML report. Otherwise the locator chain is used.
+    const username = page.getByRole('row', { name: 'User ' }).locator('#username').describe('The username field'); //Unlike WebDriver - no search for the element is performed here in browser. No need to await.
+    //The variable can then be used multiple times instead of repeating the entire locator.
+    await page.locator('input').first().fill('test')
 
-  await username.click(); //The search for the element starts when an action is called. You *must* await actions, or your tests may flake/fail.
-  await username.fill('edgewords');
-  await page.locator('#username').filter({ visible: true }).click();
-  //locator() takes CSS or xpath. Prefer CSS.
-  await page.locator('#password').click();
-  await page.locator('#password').fill('edgewords123');
-  //CSS (and XPath) locators almost inevitably depend on the page structure (DOM). PW (recorder) prefers accessibility locators like getByRole getByText etc as it is reasoned they are less likely to break with further development of the target site. 
-  await page.getByRole('link', { name: 'Submit' }).click();
+    await username.click(); //The search for the element starts when an action is called. You *must* await actions, or your tests may flake/fail.
+    await username.fill('edgewords');
+    await page.locator('#username').filter({ visible: true }).click();
+    //locator() takes CSS or xpath. Prefer CSS.
+    await page.locator('#password').click();
+    await page.locator('#password').fill('edgewords123');
+    //CSS (and XPath) locators almost inevitably depend on the page structure (DOM). PW (recorder) prefers accessibility locators like getByRole getByText etc as it is reasoned they are less likely to break with further development of the target site. 
+    await page.getByRole('link', { name: 'Submit' }).click();
+  })
+
   //Expects have 5s to complete. The test as a whole has 30s. (By default)
   await expect(page.getByRole('heading', { name: 'Add A Record To the Database' })).toBeVisible();
   await expect(page.locator('h1')).toContainText('Add A Record To the Database');
 
-  let linkText="Submit";
+  let linkText = "Submit";
   let row3cell1 = "Pin?";
 
   await expect(page.locator('#AddRecord')).toMatchAriaSnapshot(`
@@ -114,26 +117,26 @@ test('Actions', async ({ page }) => {
   await page.getByRole('link', { name: 'Forms' }).click();
   await expect(page).toHaveTitle(/For.*/i)
   await expect(page).toHaveURL(/.*forms\.html$/)
-  await page.locator('#textInput').click({position:{x: 1,y:1}});
+  await page.locator('#textInput').click({ position: { x: 1, y: 1 } });
   await page.locator('#textInput').fill('Hello World');
-  
+
   await expect(page.locator('#textInput')).toHaveScreenshot('textbox.png', { //On first run a "golden sample" is captured and written to disc. Following runs cheack against that sample.
-      threshold: 0.9, //Allowable colour variance 0-1
-      //maxDiffPixelRatio: 0.3, //Allowable different pixels 0-1
-      //maxDiffPixels: 100 //Exact number of pixel allowed to differ
-    }) //Will still fail regardless if the image sizes don't match
+    threshold: 0.9, //Allowable colour variance 0-1
+    //maxDiffPixelRatio: 0.3, //Allowable different pixels 0-1
+    //maxDiffPixels: 100 //Exact number of pixel allowed to differ
+  }) //Will still fail regardless if the image sizes don't match
 
   await expect(page.locator('#textInput')).toHaveValue('Hello World')
   //await expect(page.locator('#textInput')).toBeHidden({timeout: 10000});
-  const slowExpect = expect.configure({timeout: 7000});
+  const slowExpect = expect.configure({ timeout: 7000 });
 
   await slowExpect.soft(page.locator('#textInput')).toBeHidden();
-  
+
   await page.locator('#textInput').fill('Hello Steve');
   //await page.locator('#textInput').clear(); //Not like a real user
   await page.locator('#textInput').press('Control+a'); //More like a real user
   await page.locator('#textInput').press('Backspace');
-  await page.locator('#textInput').pressSequentially('Hello World', {delay: 500}); //Slow real typing
+  await page.locator('#textInput').pressSequentially('Hello World', { delay: 500 }); //Slow real typing
   //await page.locator('#textInput').pressSequentially('Hello World'); //Press seq doesnt clear, just adds text
   await page.locator('#textArea').click();
   await page.locator('#textArea').fill('Steve\nwas\nhere\n');
@@ -150,18 +153,18 @@ test('Actions', async ({ page }) => {
 
 });
 
-   test('Drag drop', async ({ page }) => {
-    await page.goto('/webdriver2/docs/cssXPath.html');
-    //Dragging and dropping one element to another is simple:
-    //await page.locator('div#one').dragTo(page.locator('div#two'))
+test('Drag drop', async ({ page }) => {
+  await page.goto('/webdriver2/docs/cssXPath.html');
+  //Dragging and dropping one element to another is simple:
+  //await page.locator('div#one').dragTo(page.locator('div#two'))
 
-    //Dragging and dropping one element is a little trickier:
-    await page.dragAndDrop('#slider a', //Source
-      '#slider a', //Target (same)
-      {
-        targetPosition: { x: 100, y: 0 }, //How far to drag
-        force: true, //Dont do actionability checks (don't worry that we are dragging the source "outside" of itself)
-        steps: 20
-      } //Smooth the movement over 20 steps
-    )
-  });
+  //Dragging and dropping one element is a little trickier:
+  await page.dragAndDrop('#slider a', //Source
+    '#slider a', //Target (same)
+    {
+      targetPosition: { x: 100, y: 0 }, //How far to drag
+      force: true, //Dont do actionability checks (don't worry that we are dragging the source "outside" of itself)
+      steps: 20
+    } //Smooth the movement over 20 steps
+  )
+});

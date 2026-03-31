@@ -32,8 +32,8 @@ export default defineConfig({
     baseURL: 'https://www.edgewordstraining.co.uk/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-    headless: false,
+    trace: 'on',
+    //headless: false,
     //launchOptions: {slowMo: 1000},
     screenshot: 'only-on-failure',
     actionTimeout: 5000,
