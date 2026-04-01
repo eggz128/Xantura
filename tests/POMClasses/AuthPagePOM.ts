@@ -5,7 +5,8 @@ export class AuthPagePOM{
     page: Page //Property to hold the page so other methods here can use it
     usernameInput: Locator
     passwordInput: Locator
-    submitButton: Locator
+    private readonly submitButton: Locator //Private - can only be used in this class - not from test
+                                            //readonly - once set in constructor, cannot be changed elsewhere
 
     //Constructor is a "special" method that automatically runs when this class is turned in to an object
     constructor(page: Page){

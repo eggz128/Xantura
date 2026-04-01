@@ -1,0 +1,17 @@
+Run before each test in this file (multiple)
+Run before each test in this file (multiple)
+There are 5 links
+The link texts are:
+Home
+Basic HTML
+Forms
+Dynamic Content
+CSS/XPath
+Home
+Basic HTML
+Forms
+Dynamic Content
+CSS/XPath
+Run after each test finishes (multiple)
+Run after each test finishes (multiple)
+Run once when everything in this file has finished

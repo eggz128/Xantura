@@ -1,0 +1,147 @@
+Run once, before anything in this file runs
+Run once, before anything in this file runs
+Run before each test in this file (multiple)
+Run before each test in this file (multiple)
+Without 'await'ing textContent() you get a 'promise' of the future text, not the actual text
+Promise { <pending> }
+The right column text is with textContent is: 
+                Forms
+                
+                
+                This form has an id of theForm.
+                
+                
+                
+                    
+                        
+                            Text Input with id/name textInput *
+                            
+                                
+                            
+                        
+                        
+                            Text Area with id/name textArea
+                            
+                                
+                            
+                        
+                        
+                            Checkbox with id/name checkbox
+                            
+                                
+                            
+                        
+                        
+                            Select with id/name select
+                            
+                                
+                                    Selection One
+                                    Selection Two
+                                    Selection Three                                                                        
+                                
+                            
+                        
+                        
+                            
+                                Radio buttons with id/name radio
+                            
+                            
+                                One
+                                Two
+                                Three
+                            
+                        
+                        
+                            
+                                Password input with id/name password
+                            
+                            
+                                
+                            
+                        
+                        
+                            
+                                File selector with id/name file
+                            
+                            
+                                
+                            
+                         
+                        
+                            
+                            
+                                Submit  Clear                                
+                            
+                        
+                        
+                            * Mandatory field.
+                    
+                
+                
+                    
+                        
+                            Type
+                            id
+                            Value
+                        
+                        
+                            Text input
+                            textInput
+                            
+                        
+                        
+                            Text area
+                            textArea
+                            
+                        
+                        
+                            Select
+                            select
+                            
+                        
+                        
+                            Checkbox
+                            checkbox
+                            
+                        
+                        
+                            Radio buttons
+                            textInput
+                            
+                        
+                        
+                            Password
+                            password
+                            
+                        
+                        
+                            File Input
+                            file
+                            
+                                                                                                                                                
+                    
+                    
+                    Back to form
+                
+            
+The right column text is with innertext is: Forms
+
+This form has an id of theForm.
+
+Text Input with id/name textInput *	
+Text Area with id/name textArea	
+Checkbox with id/name checkbox	
+Select with id/name select	
+Selection One
+Selection Two
+Selection Three
+
+Radio buttons with id/name radio	One Two Three
+Password input with id/name password	
+File selector with id/name file	
+	Submit Clear
+* Mandatory field.
+The text box contains
+The text box actually contains: Hello World
+Run after each test finishes (multiple)
+Run after each test finishes (multiple)

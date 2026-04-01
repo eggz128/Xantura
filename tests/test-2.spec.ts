@@ -17,7 +17,7 @@ test.afterEach(() => {
 
 
 test.describe('A suite of tests', () => {
-
+  test.describe.configure({mode: 'serial'}) //Opt out of parallel execution for this suite only
 
   test.describe('Another suite, in a suite in a suite', () => {
     //test.slow();
@@ -172,6 +172,10 @@ test('Screenshots and reporting ',
             await page.pdf({ path: './manualscreenshots/printed.pdf' })
         }
 
+        test.info().annotations.push({
+          type: 'abcd',
+          description: 'efgh',
+        })
 
         console.log("Appears in std out section of the report") //In report at bottom, displayed in terminal at run time
         //Attaching arbitary data to the report.
