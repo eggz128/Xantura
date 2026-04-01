@@ -1,4 +1,5 @@
 import { request, test, expect } from '@playwright/test';
+//Run against https://github.com/edgewords/EdgeAPIserver
 let baseRequestUrl = 'http://localhost:2002/api';
 
 test('Simple Get', async ({ request }) => {

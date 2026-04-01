@@ -1,0 +1,6 @@
+Global beforeEach
+Navigated to Google
+Global afterEach
+Last URL: https://www.ikea.com/global/en/stories/our-roots/meatball-40-years-251024/
+Global afterAll
+Finished with worker

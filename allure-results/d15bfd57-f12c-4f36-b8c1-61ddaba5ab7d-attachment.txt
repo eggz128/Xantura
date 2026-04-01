@@ -1,0 +1,6 @@
+Global beforeAll
+Starting test worker 6
+Global beforeEach
+Navigated to Google
+Global afterEach
+Last URL: https://www.edgewordstraining.co.uk/webdriver2/sdocs/add_record.php

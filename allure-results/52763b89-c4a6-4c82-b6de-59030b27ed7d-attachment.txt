@@ -1,0 +1,8 @@
+Global beforeEach
+Navigated to Google
+Vneck Tshirt
+Tshirt
+Polo
+Long Sleeve Tee
+Global afterEach
+Last URL: https://www.edgewordstraining.co.uk/demo-site/

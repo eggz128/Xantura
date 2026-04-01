@@ -1,0 +1,8 @@
+Global beforeAll
+Starting test worker 7
+Global beforeEach
+Navigated to Google
+Global afterEach
+Last URL: https://www.edgewordstraining.co.uk/webdriver2/docs/forms.html
+Global afterAll
+Finished with worker

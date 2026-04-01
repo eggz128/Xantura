@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test'; //Bring in PW test() and expect() methods for use in this file
-
+import { expect } from '@playwright/test'; //Bring in PW test() and expect() methods for use in this file
+import { test } from './globalbeforeafter'
 //Test method takes 2 arguments: 1st-Test name, 2nd-call back function with the test code to run
 test('Login test @smoke', async ({ page }) => { //Always "await" steps that run in browser. To do that this function must be async
   //Cy: cy.open('https://www.edgewordstraining.co.uk/webdriver2/')
