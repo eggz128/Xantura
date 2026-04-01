@@ -72,6 +72,16 @@ export default defineConfig({
       name: 'Microsoft Edge',
       use: { ...devices['Desktop Edge'], channel: 'msedge' },
     },
+    {
+      name: 'Microsoft Edge Video',
+      use: { ...devices['Desktop Edge'],
+         channel: 'msedge',
+         video: 'on',
+         headless: true,
+         launchOptions: {slowMo: 1000}, //Slow down to make sure video captures the action
+        },
+        testMatch: 'homework.spec.ts' //Only run this test in this project
+    },
     // {
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },

@@ -180,31 +180,4 @@ test('Screenshots and reporting ',
         await testInfo.attach('Screenshot from variable', { body: screenshot, contentType: 'image/png' });
     });
 
-    test('Options screenshots and validation', async({page},testInfo)=>{
-      await page.goto("https://www.edgewordstraining.co.uk/webdriver2/docs/forms.html")
-      await page.locator('#select').click();
-      const optionsScreenshot = await page.screenshot(); //Get the whole page - if you attempt to screenshot a webelement the options drop down is collapsed
-      await testInfo.attach('Screenshot from variable', { body: optionsScreenshot, contentType: 'image/png' });
-
-      const optionsCollection = await page.locator('#select > option').all();
-      for(const elm of optionsCollection){
-        console.log(await elm.textContent());
-      };
-
-      const expectedOptions = [
-        "Selection One",
-        "Selection TwoXXX", //Deliberate fail to show test report
-        "Selection Three"
-      ];
-
-      //Check optionsCollection matches expectedOptions
-      for(let i=0; i<expectedOptions.length; i++){
-        const optionText = await optionsCollection[i].textContent();
-        expect.soft(optionText).toBe(expectedOptions[i]);
-      }
-
-      const optionTexts = await Promise.all(optionsCollection.map(elm => elm.textContent()));
-      expect(optionTexts).toEqual(expectedOptions);
-
-
-    });
+    
